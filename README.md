@@ -24,7 +24,7 @@ For run this application you need to have erlang and Elixir installed. You can f
 Clone this repo and cd into and install dependencies with 
 
 ```bash 
-`mix deps.get`
+mix deps.get
 ```
 
 Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
