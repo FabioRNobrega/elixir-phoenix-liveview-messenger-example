@@ -1,6 +1,6 @@
 # Messenger Example | Farno 
 
-This is a simple messenger application with phoenix live view and elixir, this project was done following the talk of [Geoffrey Lessel](https://twitter.com/geolessel) on Manning live stream on [Youtube](https://youtu .be/_rTFZbvMfJA). I made some improvements such as layout, but the core knowledge is still there.
+This is a simple messenger application with phoenix live view and elixir, this project was done following the talk of [Geoffrey Lessel](https://twitter.com/geolessel) on Manning live stream on [Youtube](https://youtu.be/_rTFZbvMfJA). I made some improvements such as layout, but the core knowledge is still there.
 
 > Support Lessel buy his book at [Phoenix in Action](http://phoenixinaction.com)
 
