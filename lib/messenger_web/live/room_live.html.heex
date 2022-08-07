@@ -1,9 +1,9 @@
-<p> Welcome to <strong> <%= @room_id %>  </strong> room</p>
+<p> Welcome to <strong> <%= @room_id %>  </strong> room as <strong> <%= @user_name %> </strong></p>
 
 <div id="chat-container">
   <div id="chat-messages" phx-update="append">
     <%= for message <- @messages do %>
-      <p id={message.uuid}> <%= message.content %> </p>
+      <p id={message.uuid}> <strong> <%= message.user_name %>: </strong> <%= message.content %> </p>
     <% end %>
   </div>
   <%= f = form_for :chat, "#", id: "chat-form", phx_submit: :submit_message, phx_change: :form_update %>
