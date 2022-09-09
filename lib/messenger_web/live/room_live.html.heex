@@ -1,11 +1,16 @@
 <p> Welcome to <strong> <%= @room_id %>  </strong> room as <strong> <%= @user_name %> </strong></p>
 
-<div id="chat-container">
-  <div id="chat-messages" phx-update="append">
-    <%= for message <- @messages do %>
-      <p id={message.uuid}> <strong> <%= message.user_name %>: </strong> <%= message.content %> </p>
-    <% end %>
+<div class="chat">
+  <div id="chat-container" class="chat__messages">
+    <div id="chat-messages" class="chat__messages--input" phx-update="append">
+      <%= for message <- @messages do %>
+        <p id={message.uuid}> <strong> <%= message.user_name %>: </strong> <%= message.content %> </p>
+      <% end %>
+    </div>
+    <%= f = form_for :chat, "#", id: "chat-form", phx_submit: :submit_message, phx_change: :form_update %>
+      <%= text_input f, :message, value: @message, placeholder: "Enter your message..." %>
   </div>
-  <%= f = form_for :chat, "#", id: "chat-form", phx_submit: :submit_message, phx_change: :form_update %>
-    <%= text_input f, :message, value: @message, placeholder: "Enter your message..." %>
+  <div class="chat__users">
+    <strong> On Chat </strong>
+  </div>
 </div>
