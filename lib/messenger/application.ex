@@ -13,9 +13,10 @@ defmodule Messenger.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: Messenger.PubSub},
       # Start the Endpoint (http/https)
-      MessengerWeb.Endpoint
+      MessengerWeb.Endpoint,
       # Start a worker by calling: Messenger.Worker.start_link(arg)
       # {Messenger.Worker, arg}
+      MessengerWeb.Presence
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
