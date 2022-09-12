@@ -4,13 +4,20 @@
   <div id="chat-container" class="chat__messages">
     <div id="chat-messages" class="chat__messages--input" phx-update="append">
       <%= for message <- @messages do %>
-        <p id={message.uuid}> <strong> <%= message.user_name %>: </strong> <%= message.content %> </p>
+        <%= display_message(message) %>
       <% end %>
     </div>
     <%= f = form_for :chat, "#", id: "chat-form", phx_submit: :submit_message, phx_change: :form_update %>
       <%= text_input f, :message, value: @message, placeholder: "Enter your message..." %>
   </div>
   <div class="chat__users">
-    <strong> On Chat </strong>
+    <strong> Online Now </strong>
+    <ol>
+      <%= for user <- @user_list  do %>
+       <li class="chat__users--name">
+          <%= user %>
+        </li>
+      <% end %>
+    </ol>
   </div>
 </div>

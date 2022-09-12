@@ -38,6 +38,11 @@
   width: 30%;
 }
 
+.chat__users--name {
+  margin: 5px 0;
+  font-weight: strong;
+}
+
 #chat-form_message {
   margin-bottom: 0;
 }

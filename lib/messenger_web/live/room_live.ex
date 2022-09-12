@@ -19,6 +19,7 @@ defmodule MessengerWeb.RoomLive do
       message: "",
       topic: topic,
       messages: [],
+      user_list: [],
       temporary_assigns: [messages: []]
     )}
   end
@@ -32,13 +33,11 @@ defmodule MessengerWeb.RoomLive do
 
   @impl true
   def handle_event("form_update", %{"chat" => %{"message" => message}}, socket) do
-    Logger.info(message: message)
     {:noreply, assign(socket, message: message)}
   end
 
   @impl true
   def handle_info(%{event: "new-message", payload: message}, socket) do
-    Logger.info(payload: message)
     {:noreply, assign(socket, messages: [message])}
   end
 
@@ -49,16 +48,31 @@ defmodule MessengerWeb.RoomLive do
       joins
       |> Map.keys()
       |> Enum.map(fn user_name ->
-        %{ uuid: UUID.uuid4(), content: "#{user_name} joined", user_name: "System"}
+        %{ type: :system, uuid: UUID.uuid4(), content: "#{user_name} joined" }
       end)
 
     leaves_messages =
       leaves
       |> Map.keys()
       |> Enum.map(fn user_name ->
-        %{ uuid: UUID.uuid4(), content: "#{user_name} left", user_name: "System"}
+        %{ type: :system, uuid: UUID.uuid4(), content: "#{user_name} left" }
       end)
 
-    {:noreply, assign(socket, messages: join_messages ++ leaves_messages)}
+      user_list = MessengerWeb.Presence.list(socket.assigns.topic)
+      |> Map.keys()
+
+    {:noreply, assign(socket, messages: join_messages ++ leaves_messages, user_list: user_list)}
+  end
+
+  def display_message(%{type: :system, uuid: uuid, content: content}) do
+    ~E"""
+     <p id={<%= uuid %>}> <em> <%= content %> </em> </p>
+    """
+  end
+
+  def display_message(assigns) do
+    ~H"""
+      <p id={@uuid}> <strong> <%= @user_name %>: </strong> <%= @content %> </p>
+    """
   end
 end
